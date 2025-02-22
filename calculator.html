@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="calc-style.css">
+
+<body>
+
+  </head>
+  <div class="container">
+    <h1>Calculator 100ms</h1>
+    <div class="display">
+      <span class="display-content" id="display-content">0</span>
+      <span class="loader">|</span>
+    </div>
+    <div class="number-container">
+      <button onclick="calculate('1')">1</button>
+
+      <button onclick="calculate('2')">2</button>
+
+      <button onclick="calculate('3')">3</button>
+
+      <button onclick="calculate('+')">+</button>
+
+      <button onclick="calculate('4')">4</button>
+
+      <button onclick="calculate('5')">5</button>
+
+      <button onclick="calculate('6')">6</button>
+
+      <button onclick="calculate('-')">-</button>
+
+      <button onclick="calculate('7')">7</button>
+
+      <button onclick="calculate('8')">8</button>
+
+      <button onclick="calculate('9')">9</button>
+
+      <button onclick="calculate('*')">*</button>
+
+      <button onclick="calculate('0')">0</button>
+
+      <button onclick="calculate('%')">%</button>
+
+      <button onclick="evaluateCalc()">=</button>
+
+      <button onclick="calculate('/')">/</button>
+
+      <button onclick="clearDisplay()">clear</button>
+    </div>
+  </div>
+  <script>
+    let calc = '';
+    const element = document.getElementById("display-content");
+    const crElement = document.getElementsByClassName("loader")[0]; //
+    function calculate(op) {
+      calc += op;
+      element.innerText = calc;
+    }
+    function evaluateCalc() {
+      element.innerText = eval(calc) || 0;
+      crElement.innerText = ""
+    }
+    function clearDisplay() {
+      calc = '';
+      element.innerText = calc || 0;
+      crElement.innerText = "|"
+    }
+    document.addEventListener('keydown', (e) => {
+      // console.log(e.key);
+
+      if (e.key == "=" || e.key == "Enter") {
+        evaluateCalc();
+      } else if (e.key == "Backspace") {
+        calc = calc.substring(0, calc.length - 1) || '';  //
+        element.innerText = calc || 0;                    //
+      }
+      else if (e.key.length == 1) {     //?
+        calculate(e.key)
+      }
+    })
+  </script>
+
+</body>
+
+</html>
